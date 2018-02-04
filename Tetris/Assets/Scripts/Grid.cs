@@ -7,16 +7,6 @@ public class Grid : MonoBehaviour {
 	public static int h = 20;
 	public static Transform[,] grid = new Transform[w, h];
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public static Vector2 RoundVector2(Vector2 v) {
 		return new Vector2(Mathf.Round(v.x), Mathf.Round(v.y));
 	}
@@ -35,7 +25,7 @@ public class Grid : MonoBehaviour {
 		}
 	}
 
-	public static bool isRowFull(int y) {
+	static bool isRowFull(int y) {
 		for (int x = 0; x < w; x++) {
 			if (grid[x, y] == null) {
 				return false;
@@ -45,20 +35,20 @@ public class Grid : MonoBehaviour {
 		return true;
 	}
 
-	public static void deleteRow(int y) {
+	static void deleteRow(int y) {
 		for (int x = 0; x < w; x++) {
 			Destroy(grid[x, y].gameObject);
 			grid[x, y] = null;
 		}
 	}
 
-	public static void dropRowsAbove(int y) {
+	static void dropRowsAbove(int y) {
 		for (int i = y; i < h; i++) {
 			dropRow(i);
 		}
 	}
 
-	public static void dropRow(int y) {
+	static void dropRow(int y) {
 		for (int x = 0; x < w; x++) {
 			if (grid[x, y] != null) {
 				grid[x, y - 1] = grid[x, y];
