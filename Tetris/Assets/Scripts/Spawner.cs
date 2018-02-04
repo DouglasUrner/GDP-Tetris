@@ -1,21 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
   // Tetrominos
-	public GameObject[] tetrominos;
+	public GameObject[] Tetrominos;
 
 	// Use this for initialization
 	void Start () {
-		spawnNext();
+		SpawnNext();
 	}
 
-	public void spawnNext() {
-		int i = Random.Range(0, tetrominos.Length);
+	public void SpawnNext() {
+		int i = Random.Range(0, Tetrominos.Length);
 		
 		// Spawn a Tetromino at the current location.
-		Instantiate(tetrominos[i], transform);
+		Instantiate(Tetrominos[i], transform);
 	}
 }

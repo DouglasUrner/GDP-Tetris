@@ -63,7 +63,7 @@ public class Tetromino : MonoBehaviour {
 				Grid.DeleteFullRows();
 				
 				// Spawn a new Tetromino.
-				FindObjectOfType<Spawner>().spawnNext();
+				FindObjectOfType<Spawner>().SpawnNext();
 				
 				// Disable the script.
 				enabled = false;
