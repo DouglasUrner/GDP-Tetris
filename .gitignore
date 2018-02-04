@@ -4,6 +4,7 @@ Tetris/[Oo]bj/
 Tetris/[Bb]uild/
 Tetris/[Bb]uilds/
 Tetris/Assets/AssetStoreTools*
+Tetris/Assets/Plugins*
 
 # macOS
 .DS_Store
