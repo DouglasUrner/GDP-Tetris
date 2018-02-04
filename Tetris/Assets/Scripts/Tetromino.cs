@@ -12,7 +12,8 @@ public class Tetromino : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	private void Update () {		
+	private void Update () {
+		// User wants to move the piece to the left.
 		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
 			// Try to move.
 			transform.position += Vector3.left;
@@ -23,7 +24,10 @@ public class Tetromino : MonoBehaviour {
 			} else {
 				transform.position += Vector3.right;
 			}
-		} else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+		}
+		
+		// User is trying to move right.
+		else if (Input.GetKeyDown(KeyCode.RightArrow)) {
 			// Try to move.
 			transform.position += Vector3.right;
 
@@ -33,7 +37,10 @@ public class Tetromino : MonoBehaviour {
 			} else {
 				transform.position += Vector3.left;
 			}
-		} else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+		}
+		
+		// Rotate counter-clockwise.
+		else if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			// Try to move.
 			transform.Rotate(0, 0, -90);
 
@@ -45,7 +52,7 @@ public class Tetromino : MonoBehaviour {
 			}
 		}
 		
-		// Move downwards on each tick and Fall
+		// Move downwards on each tick or fall if user is pressing down arrow.
 		else if (Input.GetKeyDown(KeyCode.DownArrow) ||
 		           Time.time - _lastFall >= 1) {
 			// Try to move.
