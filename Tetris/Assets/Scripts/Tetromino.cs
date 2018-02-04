@@ -60,7 +60,7 @@ public class Tetromino : MonoBehaviour {
 				transform.position += Vector3.up;
 				
 				// We've hit bottom, clear any full rows.
-				Grid.deleteFullRows();
+				Grid.DeleteFullRows();
 				
 				// Spawn a new Tetromino.
 				FindObjectOfType<Spawner>().spawnNext();
@@ -76,12 +76,12 @@ public class Tetromino : MonoBehaviour {
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.RoundVector2(child.position);
 
-			if (!Grid.insideBorder(v))
+			if (!Grid.InsideBorder(v))
 				return false;
 			
-			// Check for a block in the grid cell that is not part of this Tetromino
-			if (Grid.grid[(int) v.x, (int) v.y] != null && 
-			    Grid.grid[(int) v.x, (int) v.y].parent != transform) {
+			// Check for a block in the Well cell that is not part of this Tetromino
+			if (Grid.Well[(int) v.x, (int) v.y] != null && 
+			    Grid.Well[(int) v.x, (int) v.y].parent != transform) {
 				return false;
 			}
 		}
@@ -92,9 +92,9 @@ public class Tetromino : MonoBehaviour {
 		// Remove old children (blocks).
 		for (var y = 0; y < Grid.h; y++) {
 			for (int x = 0; x < Grid.w; x++) {
-				if (Grid.grid[x, y] != null) {
-					if (Grid.grid[x,y].parent == transform) {
-						Grid.grid[x, y] = null;
+				if (Grid.Well[x, y] != null) {
+					if (Grid.Well[x,y].parent == transform) {
+						Grid.Well[x, y] = null;
 					}
 				}
 			}
@@ -103,7 +103,7 @@ public class Tetromino : MonoBehaviour {
 		// Move, by adding new children (blocks) at the next location of the piece.
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.RoundVector2(child.position);
-			Grid.grid[(int) v.x, (int) v.y] = child;
+			Grid.Well[(int) v.x, (int) v.y] = child;
 		}
 	}
 }
