@@ -6,7 +6,7 @@ public class Tetromino : MonoBehaviour {
 	float lastFall = 0;
 
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		if (!isValidGridPosition()) {
 			Debug.Log("Game over.");
 			Destroy(gameObject);
@@ -14,14 +14,14 @@ public class Tetromino : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {		
+	private void Update () {		
 		if (Input.GetKeyDown(KeyCode.LeftArrow)) {
 			// Try to move.
 			transform.position += Vector3.left;
 			
 			// Check if it is a valid position.
 			if (isValidGridPosition()) {
-				updateTetromino();
+				moveTetromino();
 			} else {
 				transform.position += Vector3.right;
 			}
@@ -31,7 +31,7 @@ public class Tetromino : MonoBehaviour {
 
 			// Check if it is a valid position.
 			if (isValidGridPosition()) {
-				updateTetromino();
+				moveTetromino();
 			} else {
 				transform.position += Vector3.left;
 			}
@@ -41,7 +41,7 @@ public class Tetromino : MonoBehaviour {
 
 			// Check if it is a valid position.
 			if (isValidGridPosition()) {
-				updateTetromino();
+				moveTetromino();
 			} else {
 				transform.Rotate(0, 0, 90);
 			}
@@ -55,7 +55,7 @@ public class Tetromino : MonoBehaviour {
 
 			// Check if it is a valid position.
 			if (isValidGridPosition()) {
-				updateTetromino();
+				moveTetromino();
 			} else {
 				transform.position += Vector3.up;
 				
@@ -88,9 +88,9 @@ public class Tetromino : MonoBehaviour {
 		return true;
 	}
 
-	void updateTetromino() {
+	void moveTetromino() {
 		// Remove old children (blocks).
-		for (int y = 0; y < Grid.h; y++) {
+		for (var y = 0; y < Grid.h; y++) {
 			for (int x = 0; x < Grid.w; x++) {
 				if (Grid.grid[x, y] != null) {
 					if (Grid.grid[x,y].parent == transform) {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grid : MonoBehaviour {
 	public static int w = 10;
 	public static int h = 20;
+	// Tronsforms use a 3D position, even in a 2D game.
 	public static Transform[,] grid = new Transform[w, h];
 
 	public static Vector2 RoundVector2(Vector2 v) {
