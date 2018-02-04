@@ -90,8 +90,8 @@ public class Tetromino : MonoBehaviour {
 
 	void moveTetromino() {
 		// Remove old children (blocks).
-		for (var y = 0; y < Grid.h; y++) {
-			for (int x = 0; x < Grid.w; x++) {
+		for (var y = 0; y < Grid.Height; y++) {
+			for (int x = 0; x < Grid.Width; x++) {
 				if (Grid.Well[x, y] != null) {
 					if (Grid.Well[x,y].parent == transform) {
 						Grid.Well[x, y] = null;
