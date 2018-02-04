@@ -53,7 +53,7 @@ public class Grid : MonoBehaviour {
 	}
 
 	public static void dropRowsAbove(int y) {
-		for (int i = 0; i < h; i++) {
+		for (int i = y; i < h; i++) {
 			dropRow(i);
 		}
 	}
@@ -64,7 +64,7 @@ public class Grid : MonoBehaviour {
 				grid[x, y - 1] = grid[x, y];
 				grid[x, y] = null;
 				
-				grid[x, y - 1].position += new Vector3(0, -1, 0);
+				grid[x, y - 1].position += Vector3.down;
 			}
 		}
 	}
