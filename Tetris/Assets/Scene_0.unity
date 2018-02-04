@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99595d1fe2aef48c4b1b67111db6c05d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetrominos:
+  Tetrominos:
   - {fileID: 1959867218960970, guid: f47381e119e8e40d8b0abe371d0d65bd, type: 2}
   - {fileID: 1725128083677834, guid: c93d36037dbce476d9d18554d27abd3e, type: 2}
   - {fileID: 1516457089303398, guid: 642a33cafd58b4cbb85565921054e508, type: 2}
