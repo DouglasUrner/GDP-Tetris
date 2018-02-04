@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tetromino : MonoBehaviour {
-	float lastFall = 0;
+	float _lastFall = 0;
 
 	// Use this for initialization
 	private void Start () {
-		if (!isValidGridPosition()) {
+		if (!IsValidGridPosition()) {
 			Debug.Log("Game over.");
 			Destroy(gameObject);
 		}
@@ -20,8 +18,8 @@ public class Tetromino : MonoBehaviour {
 			transform.position += Vector3.left;
 			
 			// Check if it is a valid position.
-			if (isValidGridPosition()) {
-				moveTetromino();
+			if (IsValidGridPosition()) {
+				MoveTetromino();
 			} else {
 				transform.position += Vector3.right;
 			}
@@ -30,8 +28,8 @@ public class Tetromino : MonoBehaviour {
 			transform.position += Vector3.right;
 
 			// Check if it is a valid position.
-			if (isValidGridPosition()) {
-				moveTetromino();
+			if (IsValidGridPosition()) {
+				MoveTetromino();
 			} else {
 				transform.position += Vector3.left;
 			}
@@ -40,8 +38,8 @@ public class Tetromino : MonoBehaviour {
 			transform.Rotate(0, 0, -90);
 
 			// Check if it is a valid position.
-			if (isValidGridPosition()) {
-				moveTetromino();
+			if (IsValidGridPosition()) {
+				MoveTetromino();
 			} else {
 				transform.Rotate(0, 0, 90);
 			}
@@ -49,13 +47,13 @@ public class Tetromino : MonoBehaviour {
 		
 		// Move downwards on each tick and Fall
 		else if (Input.GetKeyDown(KeyCode.DownArrow) ||
-		           Time.time - lastFall >= 1) {
+		           Time.time - _lastFall >= 1) {
 			// Try to move.
 			transform.position += Vector3.down;
 
 			// Check if it is a valid position.
-			if (isValidGridPosition()) {
-				moveTetromino();
+			if (IsValidGridPosition()) {
+				MoveTetromino();
 			} else {
 				transform.position += Vector3.up;
 				
@@ -68,11 +66,11 @@ public class Tetromino : MonoBehaviour {
 				// Disable the script.
 				enabled = false;
 			}
-			lastFall = Time.time;
+			_lastFall = Time.time;
 		}
 	}
 
-	bool isValidGridPosition() {
+	private bool IsValidGridPosition() {
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.RoundVector2(child.position);
 
@@ -88,18 +86,20 @@ public class Tetromino : MonoBehaviour {
 		return true;
 	}
 
-	void moveTetromino() {
+	private void MoveTetromino() {
 		// Remove old children (blocks).
 		for (var y = 0; y < Grid.Height; y++) {
-			for (int x = 0; x < Grid.Width; x++) {
-				if (Grid.Well[x, y] != null) {
-					if (Grid.Well[x,y].parent == transform) {
-						Grid.Well[x, y] = null;
-					}
+			for (var x = 0; x < Grid.Width; x++) {
+				if (Grid.Well[x, y] == null) {
+					continue;
+				}
+
+				if (Grid.Well[x, y].parent == transform) {
+					Grid.Well[x, y] = null;
 				}
 			}
 		}
-		
+
 		// Move, by adding new children (blocks) at the next location of the piece.
 		foreach (Transform child in transform) {
 			Vector2 v = Grid.RoundVector2(child.position);
